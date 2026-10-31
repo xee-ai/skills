@@ -137,6 +137,10 @@ Change nothing before it.
 - Show the flow while it loads only if the code already waits for something; otherwise show the
   defaults at once and apply the view when it arrives, before the first screen appears. **The flow
   must work with no network** and on a first launch: `getView` returns the code's defaults then.
+- Never put `getView` behind other awaited work (another SDK's subscription check, a remote
+  config, `getProfile`): it waits for Xee's activation itself. When the app loads views early at
+  launch, start them with `async let` next to that work, not after it; a sequential chain delays
+  every view by the slowest step.
 - Read each variable through `view.config.<type>("key", default:)`, with the default equal to the
   planned one; a text's default is `String(localized: "…")` (`paywall-tests` A2). `Xee.getView`
   already asks for the language the app runs in. If `screen_order` is a variable, build the screens from it, skip unknown IDs and keep

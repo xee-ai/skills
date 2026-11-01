@@ -30,6 +30,7 @@ Install the plugin once and you have every skill below.
 | [`paywall-tests`](#changing-and-testing-a-paywall) | Moves a paywall's copy and values into Xee, pushes new versions safely, suggests tests worth running, and reads the results | Xee MCP |
 | [`paywall-sync`](#after-you-change-the-paywall-code) | After you or your agent change the paywall's Swift code, compares it with Xee, rebuilds the dashboard preview and variables from the code, and pushes a new version | Xee MCP |
 | [`view-tests`](#testing-onboarding-and-other-views) | Makes onboarding and other screens without products testable: finds the flow, turns its copy into Xee values, adds analytics events with `Xee.track`, builds the preview of every screen and pushes the view | Xee MCP |
+| [`ios-monetization-expert`](#benchmarking-your-numbers) | Compares your app's pricing, trial, conversion, retention and refund numbers with the market (Adapty's State of In-App Subscriptions 2026), models LTV, ROAS and breakeven, and names the one change most worth making | Xee MCP (optional) |
 | [`xee-docs`](#asking-the-docs) | Answers a question about Xee (an SDK method, a dashboard setting, an error code, what the MCP can do) from the right docs page | nothing |
 
 ## What you can ask
@@ -44,6 +45,7 @@ Say what you want the way you would brief a colleague. You do not need to name a
 - "Add onboarding for A/B test."
 - "What should I test on my paywall to convert better?"
 - "How is the test on the main paywall doing? Which arm is ahead?"
+- "Are my subscription numbers good? Should I add a weekly plan?"
 - "What does error 2003 mean?"
 - "How do I identify users after they sign in?"
 
@@ -189,6 +191,14 @@ Add Onboarding for A/B test
 The skill finds every screen of the flow, plans the values to make testable and the events to send (which screen appeared, whether the user finished or skipped), and shows you the plan before it changes anything. After your yes it edits the Swift code, builds a preview of every screen for the dashboard, and shows you the change; after a second yes it pushes the view to Xee. It can suggest a test, with the event that judges it, and read the results.
 
 **It never starts a test.** You start, stop and ship tests in the dashboard.
+
+## Benchmarking your numbers
+
+```
+Are my numbers good? Should I raise my prices?
+```
+
+The skill reads your plans, paywall traffic and test results from Xee, asks for what Xee does not have (category, installs, ad spend), and compares each number with the market benchmarks from Adapty's [State of In-App Subscriptions 2026](https://adapty.io/state-of-in-app-subscriptions-report/). It can also project LTV, ROAS and breakeven for your plan mix, and model what-ifs. The benchmarks describe the market, not your app; a change worth trying becomes a test through `paywall-tests`. Adapted from [adaptyteam/growth-expert-skill](https://github.com/adaptyteam/growth-expert-skill) (MIT).
 
 ## Asking the docs
 

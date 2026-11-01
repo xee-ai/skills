@@ -19,8 +19,9 @@ In the app it stays ordinary SwiftUI or UIKit. Its values that someone may want 
 release (titles, button labels, whether a Skip button shows, which screens come in which order)
 live in Xee as **variables**, read through `Xee.getView`. The flow also sends **events** with
 `Xee.track` (it started, a screen appeared, it finished), and each version of the view declares
-them. A test shows two values of one variable to different users and is judged by one declared
-event, its **goal**: who saw the view, then reached the goal.
+them. A test shows two values of one variable to different users and is judged by its **goal**:
+one declared event (who saw the view, then reached it), or **revenue** (what the viewers then
+bought).
 
 You do four things, in order, with two stops for the person's yes:
 
@@ -74,7 +75,7 @@ Verify against the live docs; these are the values to expect.
 | `base_version` | The version you started from, 0 for a new view. A conflict saves nothing. |
 | `app_build` | The app build the code ships in, as for a paywall (`paywall-tests`, Facts); `get_view` → `builds` lists them. |
 | Accepted push | Returns `version`, `added`, `unchanged`, `changed`, `removed`, `tests_moved`, `tests_stopped`, and `events_added` / `events_removed` when they changed. |
-| Tests | One variable, two arms, one running test per view, judged by its goal. It stops on the same variable changes as a paywall's (`paywall-tests` A5) and also when the new version no longer declares the goal. |
+| Tests | One variable, two arms, one running test per view, judged by its goal: one declared event, or revenue. It stops on the same variable changes as a paywall's (`paywall-tests` A5) and also when the new version no longer declares its goal event (a revenue goal has none to lose). |
 
 ## 1. Find the flow
 
@@ -117,7 +118,9 @@ Use the view's ID for `<view>` (`onboarding_started`). Each event, or each scree
 `<view>_step_viewed` with a `match` of `{ "screen": "<id>" }`, becomes a declared step with a short
 label ("Started", "Saw goals", "Finished"), in the order a user meets them. Mark one as the
 **suggested goal**: normally `<view>_finished`; an action (`onboarding_notifications_allowed`) when
-that action is what the flow is for. Add `Xee.time("<view>_finished")` when the flow starts.
+that action is what the flow is for; revenue instead of an event when the person says the flow is
+there to sell (it leads into a paywall) or asks for it. Add `Xee.time("<view>_finished")` when the
+flow starts.
 
 If the code already sends analytics (another SDK's `track`, a logger), keep it. Add `Xee.track`
 next to it with Xee's names; do not remove or rename the other calls.
@@ -134,13 +137,13 @@ Change nothing before it.
 - Load the view once where the flow starts, `await Xee.getView("<view>")`, and pass it to every
   screen (an `@Observable` or `ObservableObject` holder, or the environment). Never fetch it per
   screen: users would see values from different draws.
-- Show the flow while it loads only if the code already waits for something; otherwise show the
-  defaults at once and apply the view when it arrives, before the first screen appears. **The flow
-  must work with no network** and on a first launch: `getView` returns the code's defaults then.
 - Never put `getView` behind other awaited work (another SDK's subscription check, a remote
   config, `getProfile`): it waits for Xee's activation itself. When the app loads views early at
   launch, start them with `async let` next to that work, not after it; a sequential chain delays
   every view by the slowest step.
+- Show the flow while it loads only if the code already waits for something; otherwise show the
+  defaults at once and apply the view when it arrives, before the first screen appears. **The flow
+  must work with no network** and on a first launch: `getView` returns the code's defaults then.
 - Read each variable through `view.config.<type>("key", default:)`, with the default equal to the
   planned one; a text's default is `String(localized: "…")` (`paywall-tests` A2). `Xee.getView`
   already asks for the language the app runs in. If `screen_order` is a variable, build the screens from it, skip unknown IDs and keep
@@ -181,9 +184,11 @@ sentence that a push reaches installed builds made for the latest version at onc
 Call `push_view_version` with `app`, `view`, `base_version`, `app_build` (chosen as `paywall-tests`
 A6 says, from `get_view`'s `builds`), `html`, `variables` (`key`, `type`,
 `default`, plus `renamed_from` where it applies) and `events` (`event`, `match` when narrowed,
-`label`, and `goal: true` on the suggested goal, on exactly one event). The goal is saved with the
-view: the dashboard's new-test form and `propose_test` default to it, so the person does not have to
-pick it. A new view needs no `create_view` first: the first push creates it.
+`label`, and `goal: true` on the suggested goal, on exactly one event; or, for a revenue goal,
+`revenue_goal: true` and no `goal: true`). The goal is saved with the version: the dashboard's
+new-test form and `propose_test` default to it, so the person does not have to pick it. On a later
+push, keep the goal `get_view` shows (a marked event, or `revenue_goal`): the person may have picked
+it on the view's page. A new view needs no `create_view` first: the first push creates it.
 
 - **Conflict**: call `get_view` again, redo the change on the new version, show what changed under
   you, and ask again.
@@ -195,14 +200,16 @@ pick it. A new view needs no `create_view` first: the first push creates it.
 **Proposing a test.** When the person wants one, pick one variable whose `testable` is true and
 whose change is a real hypothesis about the flow (fewer screens, a clearer first title, Skip shown
 or not). Call `propose_test` with `paywall` set to the view's ID, the `key`, the values, a reason,
-and `goal` (`event`, and `match` when the step has one), one of the view's declared events. Say it
-is a hypothesis. The person starts it from Agent in the dashboard.
+and `goal`: `{ event, match? }` for one of the view's declared events, or `"revenue"`. Say it is a
+hypothesis. The person starts it from Agent in the dashboard.
 
-**Reading results.** `get_test_results` with the view's ID gives, per arm, `viewers` and
-`converted` (viewers who then sent the goal event) and the test's `goal`. Grade them as
-`paywall-tests` mode C does (enough data first, never a lift you cannot see), with the rate
-`converted / viewers` instead of purchases. Purchases are not part of a view test; if the person
-asks whether a variant sold more, say a view test does not measure that.
+**Reading results.** `get_test_results` with the view's ID gives the test's `goal` and, per arm,
+`viewers`, `converted` (viewers who then sent the goal event; for goal `"revenue"`, viewers who then
+bought), `purchasers` and `revenue_usd` (the subscriptions viewers started after seeing the view, with
+their renewals). Grade them as `paywall-tests` mode C does (enough data first, never a lift you
+cannot see): for an event goal by the rate `converted / viewers`, for a revenue goal by purchasers
+and revenue per viewer, as a paywall test is read. On an event goal, purchases are context, not the
+verdict.
 
 ## Rules that hold always
 
@@ -227,6 +234,6 @@ End with a short note, in the person's language, built from what happened:
   dashboard. [New code needs a build before it reaches users.] To test a value, start it from the
   view's page; tests are judged by [goal label] unless you pick another goal. I never start a test."
 - After a proposal: "I've suggested [test], judged by [goal label], under Agent in the dashboard.
-  Open it, choose Approve and launch, then Create draft and Start test when you are ready."
+  Open it and choose Approve and start when you are ready; the test starts at once."
 - After reading results: "[The grade, one sentence.] Shipping A or B, or stopping the test, is
   yours, from the A/B tests page."

@@ -97,7 +97,6 @@ Claude can read results with `get_test_results` and suggest a test with `propose
 
 1. Claude sends the paywall or view, the variable and one or more values to try, with a reason. The value must fit the variable's type in the latest version. For a view, Claude also names the goal, one of the view's declared events.
 2. The suggestion appears in the dashboard under **Agent**.
-3. **Approve and launch** opens the new test page for that value, with the first suggested value as B. **Skip** sets it aside.
-4. You still choose **Create draft**, then **Start test**.
+3. **Approve and start** shows B, the share of users who see it and the check-in days, all editable, and starts the test in one step. **Skip** sets it aside, with a reason if you like.
 
 Ask in plain words, for example: *Suggest a test for the headline of the "main" paywall and propose it in Xee.* To connect Claude, see [Use Xee in Claude](/docs/use-xee-in-claude).

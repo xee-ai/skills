@@ -49,7 +49,7 @@ let restored = try await Adapty.restorePurchases()
 - **The app in Xee,** with the same bundle ID as the app. Notifications and answers for another bundle are rejected.
 - **Your products in Xee.** Run Sync on the Products page, or ask Claude to run `sync_products`. Claude also compares each product in Xee with App Store Connect (`get_product`). If a price, period, name or status differs, the plan says which, and on your yes Claude syncs that one product from App Store Connect. That changes Xee only, nothing at Apple. Claude never changes Xee's price with `edit_product` to make it match, because with Sync with App Store Connect on that would change the price at Apple.
 - **The In-App Purchase key,** added in Settings, Apple keys and chosen for the app. Restoring existing subscribers depends on it. `list_apps` shows `in_app_purchase_key: true` when it is set.
-- **The SDK key** from App settings, iOS SDK.
+- **The SDK key** from App settings, iOS.
 - **iOS 15 or later.** The SDK needs iOS 15. Raise the app's deployment target first if it is lower.
 - **A plan for the notification URL.** App Store Connect takes one URL per environment: one for Production and one for Sandbox. Adapty's setup asks for a URL in the same place, so today yours is probably Adapty's. Decide before each phase which service owns it, and check Adapty's own documentation and settings for whether it can forward notifications to another URL. Until Xee owns the URL, Xee gets no renewals or cancellations.
 

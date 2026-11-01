@@ -5,10 +5,10 @@ Add the Xee SDK to your iOS app with Swift Package Manager, then activate it onc
 - iOS 15 or later (macOS 12 and visionOS 1 are also supported).
 - An Xcode version that supports Swift tools 6.0 (Xcode 16 or later).
 - Swift Package Manager. The SDK is not published to CocoaPods.
-- An app in Xee with its bundle ID set in App settings, iOS SDK.
+- An app in Xee with its bundle ID set in App settings, iOS.
 
 > [!NOTE]
-> Before purchases unlock anything, Xee also needs your products and the app's In-App Purchase key, which lets the server check each purchase with Apple. For renewals, cancellations and refunds it also needs Apple's App Store Server Notifications: paste the notification URL from App settings, iOS SDK into App Store Connect. See [Check subscription status](/docs/subscription-status) and [Make purchases](/docs/make-purchases).
+> Before purchases unlock anything, Xee also needs your products and the app's In-App Purchase key, which lets the server check each purchase with Apple. For renewals, cancellations and refunds it also needs Apple's App Store Server Notifications: paste the notification URL from App settings, iOS into App Store Connect. See [Check subscription status](/docs/subscription-status) and [Make purchases](/docs/make-purchases).
 
 ## Install the SDK
 
@@ -32,7 +32,7 @@ targets: [
 
 ## Get your SDK key
 
-Open App settings, iOS SDK in the Xee dashboard. The **SDK** section shows:
+Open App settings, iOS in the Xee dashboard. The **SDK** section shows:
 
 | Value | What it is |
 | --- | --- |

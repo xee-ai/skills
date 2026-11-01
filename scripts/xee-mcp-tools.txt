@@ -22,3 +22,17 @@ get_app
 set_translations
 set_languages
 upload_image
+list_memories
+save_memory
+recommend
+set_check_in
+get_listing
+get_search_terms
+get_keyword_metrics
+get_ranked_keywords
+propose_keywords
+get_ads_overview
+get_ads_performance
+get_ads_targets
+get_ads_proposal
+propose_ads_changes

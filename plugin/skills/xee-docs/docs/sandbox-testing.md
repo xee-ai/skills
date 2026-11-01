@@ -14,12 +14,12 @@ Xee does not take the app's word for a purchase. When the SDK reports a test pur
 
 The first purchase unlocks without it when the In-App Purchase key is set. Set it so renewals, expiry, cancellations and refunds reach Xee too.
 
-1. In Xee, open App settings, iOS SDK and copy the **Notification URL**.
+1. In Xee, open App settings, iOS and copy the **Notification URL**.
 2. In App Store Connect, open your app, then App Information, App Store Server Notifications.
 3. Paste the URL for both **Production Server URL** and **Sandbox Server URL**, and choose **Version 2** for each.
 
 > [!IMPORTANT]
-> The **Bundle ID** in App settings, iOS SDK must match your app exactly. Xee rejects notifications for any other bundle, so a typo there means no purchase ever arrives.
+> The **Bundle ID** in App settings, iOS must match your app exactly. Xee rejects notifications for any other bundle, so a typo there means no purchase ever arrives.
 
 ## 2. Create a sandbox account
 
@@ -70,7 +70,7 @@ Also test restoring: delete the app, install it again, sign in to the same sandb
 
 Go through this before you submit a build for review.
 
-1. **SDK key.** The key you pass to `Xee.activate(withAPIKey:)` is the one shown in App settings, iOS SDK for this app. If you rotated it, ship the new one.
+1. **SDK key.** The key you pass to `Xee.activate(withAPIKey:)` is the one shown in App settings, iOS for this app. If you rotated it, ship the new one.
 3. **Apple setup.** The In-App Purchase key is added and chosen for the app. The notification URL is set for both Production and Sandbox in App Store Connect, with Version 2, and the Bundle ID in App settings matches the app.
 4. **Products.** Every product the paywalls offer exists in App Store Connect with the same product ID, and you have run Sync on the Products page so Xee has them. Products need complete metadata in App Store Connect before StoreKit returns them.
 5. **Paywall.** Each paywall ID your code asks for exists in Xee, is live and has at least one version. A paywall that is not live is not served to the SDK. See [Get a paywall and its values](/docs/get-paywall).

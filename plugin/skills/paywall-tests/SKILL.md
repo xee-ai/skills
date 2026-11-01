@@ -492,9 +492,9 @@ what you would run first and why it is first.
 one or two sentences someone can judge). When B needs translations, show them beside B and save
 them with `set_translations` in the same yes, before `propose_test`. The tool checks that the variable exists in the latest
 version and that the values fit its type; fix and retry on a refusal. The suggestion appears in the
-dashboard under **Agent**. After proposing, tell them how it goes on: **Approve and launch** opens
-the new test page with the first value as B; they still choose **Create draft** and then
-**Start test**. You do not start it. Propose one at a time, since only one test can run per paywall.
+dashboard under **Agent**. After proposing, tell them how it goes on: **Approve and start** shows
+the first value as B, the share of users who see it and the check-in days, all editable, and
+starts the test at once. You do not start it. Propose one at a time, since only one test can run per paywall.
 
 ## Mode C: read results
 
@@ -502,11 +502,15 @@ the new test page with the first value as B; they still choose **Create draft** 
    paywall. If there are no tests, say so and offer mode B. Do not invent a result.
 2. Take the newest test the person means (running first, else the latest). Each test has `name`,
    `version`, `key`, `status` (`draft`, `running` or `stopped`), `winner`, `stop_reason`, and arms
-   with `label`, `value`, `weight`, `viewers`, `purchasers`, `revenue_usd`. A draft has no numbers.
+   with `label`, `value`, `weight`, `viewers`, `purchasers`, `revenue_usd`, and `chance_to_win`
+   (the probability the arm has the best rate, the same number as the dashboard's probability to be
+   best; absent until every arm has viewers). A running test also has `days_running` and
+   `check_in` (when the agent looks at it next, and its last note). A draft has no numbers.
 3. Compute what the tool does not hand you, per arm: **conversion** = purchasers / viewers and
    **revenue per 1K viewers** = revenue_usd / viewers x 1000. Show the raw counts beside them.
-   The dashboard also shows a **probability to be best**; the tool does not return it, so say it
-   is on the test's page rather than computing a different number under the same name.
+   Quote `chance_to_win` as the tool gives it; never compute a different number under that name.
+   Only when the person asks you to recommend finishing, call `recommend` with `finish_b` or
+   `finish_a`: it proposes the finish on the Agent page and stops nothing.
 4. Check the data before the verdict:
    - Zero viewers on an arm: views are not being logged. Point to `log-paywall-views` and stop
      the analysis there.
@@ -641,9 +645,8 @@ End with a short note to the person, in their language, built from what happened
   the headline stops, no winner applied / No test was running.] The version is on the paywall's
   page, with the preview. [New code needs a build before it reaches users.] To test a value, start
   it from that page; I never start a test."
-- After mode B: "I've suggested [test] under Agent in the dashboard. Open it, choose Approve and
-  launch, then Create draft and Start test when you are ready. It is a hypothesis, and the numbers
-  will say."
+- After mode B: "I've suggested [test] under Agent in the dashboard. Open it and choose Approve and
+  start when you are ready; the test starts at once. It is a hypothesis, and the numbers will say."
 - After mode C: "[The grade, one sentence.] Shipping A or B, or stopping the test, is yours, from
   the A/B tests page. When you have a winner, I can write it into the code and push so the code
   matches what Xee serves."

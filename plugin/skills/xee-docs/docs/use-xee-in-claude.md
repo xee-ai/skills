@@ -118,8 +118,22 @@ Say the app and paywall by the IDs you see in the dashboard. A few to start with
 | `create_product` | Adds a product to Xee. It does not create it in App Store Connect; make it there with the same product ID, then sync. |
 | `sync_products` | Reads products from App Store Connect into Xee, for the whole app or one product. |
 | `edit_product` | Changes a product's reference name, US price or a display name. With Sync with App Store Connect on, the change goes to Apple first; off, it stays in Xee. |
-| `get_test_results` | The tests on a paywall or a view, with the numbers for each arm. A view test also shows its goal and, per arm, who reached it. |
-| `propose_test` | Suggests a test for you to start, on a paywall or a view (with the event that judges it). Claude never starts a test itself; you decide in the dashboard. |
+| `get_test_results` | The tests on a paywall or a view, with the numbers for each arm, each arm's chance to be best, how many days the test has run, and when the agent looks at it next. A view test also shows its goal and, per arm, who reached it. |
+| `propose_test` | Suggests a test for you to start, on a paywall or a view (with the event that judges it), with how many users see B and when to look at the results. Claude never starts a test itself; on the Agent page, Approve and start creates and starts it in one step. |
+| `list_memories` | What the agent remembers about the app's tests: your team's notes first, then every finished or continued test and the learnings from its check-ins. |
+| `save_memory` | Saves one learning about the app, in a sentence your team can read and edit in App settings, Memory. |
+| `recommend` | At a check-in on a running test: keep it running and look again in some days, or recommend finishing with B or A. A finish waits for you on the Agent page; nothing stops until you choose Finish. |
+| `set_check_in` | Moves when the agent next looks at a running test, from 1 hour to 60 days ahead. |
+| `get_listing` | Your App Store listing per language: the version on sale, its keywords field, name and subtitle, read from App Store Connect. |
+| `get_search_terms` | What people typed before tapping your Apple Ads, with installs and spend. Needs Apple Ads connected in App settings. |
+| `get_keyword_metrics` | Popularity and difficulty for keywords: from your ASO provider if you linked one (each lookup uses its credits), otherwise from Xee's built-in data for terms the app ranks for. |
+| `get_ranked_keywords` | Every term the app ranks for in one storefront, most popular first, with popularity, difficulty and rank. From Xee's built-in keyword data. |
+| `propose_keywords` | Suggests a new keywords field for one language. You approve it on the Agent page and paste it into your next App Store version; Xee never changes App Store Connect. |
+| `get_ads_overview` | Your Apple Ads campaigns, ad groups and keywords with their bids and budgets, read live from Apple. Needs Apple Ads connected and an ad account picked in App settings. |
+| `get_ads_performance` | Apple's spend and installs beside what those installs did in your app: trials, paying subscribers, revenue, cost per subscriber and 7-day return on ad spend. Synced daily. |
+| `get_ads_targets` | The target cost per subscriber and 7-day return on ad spend you set in App settings › Apple Ads, and whether the connection can make changes. |
+| `get_ads_proposal` | One Apple Ads proposal and how each of its changes went once applied. |
+| `propose_ads_changes` | Suggests bid, budget, keyword and negative keyword changes, within Xee's limits. You tick the ones you want on the Agent page and apply them; nothing changes in Apple Ads before that. |
 | `set_languages` | Sets the languages your paywalls and views are offered in (App settings › App Languages), usually from your app's String Catalog. Claude shows you the list and saves it after you say yes. |
 | `upload_image` | Stores an image from your app's assets (PNG, JPEG, WebP or GIF, up to 2 MB) for a paywall or view preview and returns its link, so the preview shows your real artwork. Anyone with the link can see the image. |
 | `set_translations` | Saves translations of your paywall and view texts into those languages, usually from your String Catalog, after you say yes. See [Localization](/docs/localization). |
@@ -133,7 +147,7 @@ Xee reads and edits your products through an App Store Connect API key. Reading 
 - **App Manager** or **Admin** access: can sync and edit. Choose App Manager unless Apple refuses it.
 - **Developer** and other roles: may sync, but editing is refused with "403".
 - Make the key in App Store Connect, Users and Access, Integrations, App Store Connect API, Team Keys. A key's access cannot be changed later, so generate a new one if the role is wrong.
-- Add it in [Settings, Apple keys](/settings?tab=keys), then choose it for the app in App settings, Apple keys.
+- Add it in [Settings, Apple keys](/settings?tab=keys), then choose it for the app in App settings, iOS, under Apple keys.
 - To change a price without touching App Store Connect, turn off **Sync with App Store Connect** on the product. Edits then stay in Xee.
 
 ## If it does not work

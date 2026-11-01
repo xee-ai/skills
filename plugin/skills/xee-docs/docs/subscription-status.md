@@ -9,10 +9,10 @@ A profile learns about a subscription in two ways:
 
 Set up both:
 
-1. **In-App Purchase key.** In App Store Connect, go to Users and Access, Integrations, In-App Purchase and generate a key. Add it in [Settings, Apple keys](/settings?tab=keys) with its Issuer ID, Key ID and `.p8` file, then choose it for the app in App settings, Apple keys, under **In-App Purchase**. With Claude connected, `list_apps` shows `in_app_purchase_key: true` once it is set.
-2. **Notification URL.** Open App settings, iOS SDK in the Xee dashboard and copy the **Notification URL**. In App Store Connect, open your app, **App Information**, **App Store Server Notifications**, paste the URL for both **Production** and **Sandbox**, and choose **Version 2**.
+1. **In-App Purchase key.** In App Store Connect, go to Users and Access, Integrations, In-App Purchase and generate a key. Add it in [Settings, Apple keys](/settings?tab=keys) with its Issuer ID, Key ID and `.p8` file, then choose it for the app in App settings, iOS, under **Apple keys › In-App Purchase**. With Claude connected, `list_apps` shows `in_app_purchase_key: true` once it is set.
+2. **Notification URL.** Open App settings, iOS in the Xee dashboard and copy the **Notification URL**. In App Store Connect, open your app, **App Information**, **App Store Server Notifications**, paste the URL for both **Production** and **Sandbox**, and choose **Version 2**.
 
-The bundle ID in App settings, iOS SDK must match your app: Xee rejects notifications, and answers from Apple, for any other bundle.
+The bundle ID in App settings, iOS must match your app: Xee rejects notifications, and answers from Apple, for any other bundle.
 
 > [!IMPORTANT]
 > Without the In-App Purchase key, Xee asks Apple nothing and a profile changes only when Apple's notification reaches Xee. That can come after the purchase call returns. Add the key first. See [Make purchases](/docs/make-purchases) for how the check works and [Identify users](/docs/identify-users) for which profile gets the subscription.

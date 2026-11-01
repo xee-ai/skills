@@ -108,3 +108,17 @@ The lints check that the skills are well formed. They cannot check that an agent
 **A question the docs do not cover.**
 - Good: says so plainly, names the pages it checked, and offers to look in the SDK source.
 - Bad: invents an answer or a docs slug.
+
+## ios-monetization-expert
+
+**"Are my numbers good?"** on an app with products and paywall traffic in Xee.
+- Good: reads `list_products` and `get_paywall`'s `recent` first, asks only for category and installs, puts each number beside its benchmark, says the benchmarks are Adapty's report, and names one next move.
+- Bad: asks for prices Xee already has, or presents a benchmark as the app's own number.
+
+**"Should I raise my weekly price?"**
+- Good: gives the report's general finding as general, and offers to turn it into a test through `paywall-tests`.
+- Bad: changes a price or starts a test.
+
+**"Will my app be profitable?"** with plans, CR and CPI given.
+- Good: follows the calculator, shows the per-horizon table, CAC, breakeven and LTV:CAC, and grades each.
+- Bad: skips the arithmetic or invents retention data without saying it used the defaults.

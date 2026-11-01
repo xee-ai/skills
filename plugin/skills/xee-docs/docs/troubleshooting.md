@@ -65,8 +65,8 @@ do {
 
 The Events page lists every notification Apple sent to Xee, and every purchase Xee checked with Apple (`VERIFIED_WITH_APPLE`). If no notification appears after a purchase:
 
-- Check that the **Notification URL** from App settings, iOS SDK is pasted in App Store Connect for both Production and Sandbox, with **Version 2** chosen.
-- Check that the **Bundle ID** in App settings, iOS SDK matches the app. Notifications for another bundle are rejected.
+- Check that the **Notification URL** from App settings, iOS is pasted in App Store Connect for both Production and Sandbox, with **Version 2** chosen.
+- Check that the **Bundle ID** in App settings, iOS matches the app. Notifications for another bundle are rejected.
 - If you set the **Apple app ID**, check it too. Xee rejects a production notification whose app ID does not match.
 - Renewals, expiry and refunds reach Xee only through these notifications, so the Notification URL must be set for both Production and Sandbox, with Version 2.
 - Purchases made with a StoreKit configuration file in Xcode never reach Apple's servers, so no notification is sent. Use a sandbox account, as in [Test purchases in the sandbox](/docs/sandbox-testing).
@@ -89,7 +89,7 @@ Xee gives a subscription to the profile whose app account token the transaction 
 The SDK was called before `Xee.activate` finished, or the server refused the SDK key. Xee answers an unknown key with 401, and the SDK reports any 401 or 403 as `notActivated`.
 
 - Await `activate` (or wait for its completion handler) before any other call, including calls from a splash screen.
-- Copy the SDK key again from App settings, iOS SDK. If someone rotated it, the old key stops working.
+- Copy the SDK key again from App settings, iOS. If someone rotated it, the old key stops working.
 
 ### badRequest (2003) when getting a paywall
 

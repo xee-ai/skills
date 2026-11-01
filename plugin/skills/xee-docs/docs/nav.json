@@ -21,6 +21,10 @@
     { "slug": "use-xee-in-claude", "nav": "Use Xee in Claude", "title": "Use Xee in Claude" },
     { "slug": "claude-builds-paywall", "nav": "Let Claude build your paywall", "title": "Let Claude build your paywall" }
   ] },
+  { "section": "ASO & Apple Ads", "pages": [
+    { "slug": "aso-keywords", "nav": "App Store keywords", "title": "Get App Store keyword suggestions" },
+    { "slug": "apple-ads", "nav": "Apple Ads", "title": "Connect Apple Ads and manage it with the agent" }
+  ] },
   { "section": "Users & access", "pages": [
     { "slug": "refund-saver", "nav": "Refund saver", "title": "Refund saver" }
   ] },

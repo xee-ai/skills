@@ -35,7 +35,7 @@ To run the SDK-reading checks locally, keep a checkout of the SDK at `../xee-sdk
 ### Setting it up on GitHub
 
 - In `xee-ai/XeeSDK-iOS`: the `doc-snippets` and `docs-notify` workflows and the pull request template are in its `.github/`. For the signal to reach this repository, add a secret `DOCS_REPO_TOKEN`: a fine-grained token with write access to this repository's contents. Without it the checklist comment still appears.
-- In `xee-ai/xee-skills`: the `skill-lints` workflow checks out the SDK repository, so the SDK repository must be readable by the workflow (public, or give the token access).
+- In `xee-ai/skills`: the `skill-lints` workflow checks out the SDK repository, so the SDK repository must be readable by the workflow (public, or give the token access).
 
 ## Adding a skill
 

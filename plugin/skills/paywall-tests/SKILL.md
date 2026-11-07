@@ -428,7 +428,7 @@ writing a style:
   font does not load. The dashboard's preview allows only `fonts.googleapis.com` and
   `fonts.gstatic.com`.
 
-Then call `push_paywall_version` with `app`, `paywall`, `base_version`, `app_build`, `html`,
+Then call `push_paywall` with `app`, `paywall`, `base_version`, `app_build`, `html`,
 `products`, and `variables` (`key`, `type`, `default`, plus `renamed_from` where it applies), with
 the `html` built as above.
 
@@ -510,7 +510,7 @@ starts the test at once. You do not start it. Propose one at a time, since only 
    **revenue per 1K viewers** = revenue_usd / viewers x 1000. Show the raw counts beside them.
    Quote `chance_to_win` as the tool gives it; never compute a different number under that name.
    Only when the person asks you to recommend finishing, call `recommend` with `finish_b` or
-   `finish_a`: it proposes the finish on the Agent page and stops nothing.
+   `finish_a`: it proposes the finish on To decide and stops nothing.
 4. Check the data before the verdict:
    - Zero viewers on an arm: views are not being logged. Point to `log-paywall-views` and stop
      the analysis there.

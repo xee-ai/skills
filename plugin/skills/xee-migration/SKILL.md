@@ -19,8 +19,9 @@ call mapping**, and they change. This skill holds the order, the warnings and wh
 what; it never holds Xee SDK snippets. Before each phase and before writing any code, fetch
 the pages named under "Read the docs first".
 
-**Platform.** Xee is iOS only for now (Swift, Swift Package Manager, iOS 15+). A project in
-Android, Flutter, React Native or anything else: say so in the first reply and stop.
+**Platform.** This skill covers iOS only (Swift, Swift Package Manager, iOS 15+). Moving an Android
+app to Xee is not covered yet: its SDK is a preview. For Android, Flutter, React Native or anything
+else, say so in the first reply and stop.
 
 ## How you sound
 
@@ -96,11 +97,11 @@ skill does not, the page wins; say so.
 | `list_products`, `get_product` | Which products Xee has, and one product's status against App Store Connect. |
 | `create_product`, `sync_products` | Add a product to Xee, or read the products from App Store Connect into Xee. Only after a confirm. Neither creates anything in App Store Connect. |
 | `list_paywalls`, `get_paywall` | Paywall IDs, whether each is live, version, variables and products. |
-| `create_paywall`, `push_paywall_version` | Create a paywall the code asks for but Xee lacks, then give it a first version (`base_version` 0) with its products, variables and an HTML preview. Only after a confirm (phase 1). |
+| `create_paywall`, `push_paywall` | Create a paywall the code asks for but Xee lacks, then give it a first version (`base_version` 0) with its products, variables and an HTML preview. Only after a confirm (phase 1). |
 | `list_docs`, `get_doc` | The docs, as above. |
 
 `propose_test`, `get_test_results` and `edit_product` belong to `paywall-tests` and to product
-upkeep. Do not use them here. Use `create_paywall` and `push_paywall_version` only to create a
+upkeep. Do not use them here. Use `create_paywall` and `push_paywall` only to create a
 missing paywall (phase 1); later versions belong to `paywall-tests` (phase 2).
 
 **If there are no Xee tools** (no `list_apps`, no `get_doc`), the `xee` MCP server is not
@@ -211,7 +212,7 @@ Goal: Xee can serve the app, with the old SDK still in charge. Nothing in the ap
 3. **You, after a confirm:** every paywall the code asks for exists in Xee. For an old placement
    with no Xee paywall, create it with `create_paywall` (the ID below, and a name for the
    dashboard, such as the old placement's name), then push its first version with
-   `push_paywall_version`, `base_version` 0. It appears under Paywalls in the dashboard.
+   `push_paywall`, `base_version` 0. It appears under Paywalls in the dashboard.
    - **ID**, in this order:
      1. The old SDK's own ID for that screen: Adapty's placement ID (the string passed to
         `Adapty.getPaywall(placementId:)`), RevenueCat's offering identifier, or the like.

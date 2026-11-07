@@ -69,7 +69,7 @@ Like a paywall, a view has versions, and each is pushed for an app build. The SD
 
 ## What Claude sends
 
-Claude pushes a version with the `push_view_version` tool:
+Claude pushes a version with the `push_view` tool:
 
 | Field | Rule |
 | --- | --- |

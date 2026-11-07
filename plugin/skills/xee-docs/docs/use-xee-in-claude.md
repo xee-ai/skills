@@ -54,7 +54,7 @@ The MCP gives Claude access to your Xee data. The **Xee skills** teach it how to
 In Claude Code, run this in a terminal:
 
 ```bash
-claude plugin marketplace add xee-ai/xee-skills
+claude plugin marketplace add xee-ai/skills
 claude plugin install xee-skills@xee
 ```
 
@@ -63,7 +63,7 @@ Then run `/reload-plugins` inside Claude Code, or restart it. Run `/plugin` and 
 For Codex:
 
 ```bash
-codex plugin marketplace add xee-ai/xee-skills
+codex plugin marketplace add xee-ai/skills
 codex plugin add xee-skills@xee
 ```
 
@@ -72,7 +72,7 @@ Start a new thread afterwards, so Codex picks up the skills.
 For any other agent (Cursor, Copilot, Gemini CLI and more), use the [skills CLI](https://skills.sh):
 
 ```bash
-npx skills add xee-ai/xee-skills --all
+npx skills add xee-ai/skills --all
 ```
 
 Skills installed this way do not update by themselves. Run `npx skills update` to get the latest.
@@ -82,7 +82,7 @@ Try it: open your app's project in Claude and say *Integrate Xee into my app*.
 > [!NOTE]
 > Every skill except `xee-docs` reads and changes your Xee data through the MCP, so finish steps 1 to 3 first. The skills ask before they edit your project, create products, or push a paywall version, and they never start a test: you do that in the dashboard.
 
-To update the skills later in Claude Code, run `claude plugin marketplace update xee`, then `claude plugin update xee-skills@xee`. The source and the full list of install routes are at [github.com/xee-ai/xee-skills](https://github.com/xee-ai/xee-skills).
+To update the skills later in Claude Code, run `claude plugin marketplace update xee`, then `claude plugin update xee-skills@xee`. The source and the full list of install routes are at [github.com/xee-ai/skills](https://github.com/xee-ai/skills).
 
 ## What to ask Claude
 
@@ -107,33 +107,33 @@ Say the app and paywall by the IDs you see in the dashboard. A few to start with
 | `get_app` | One app's setup values: the same as its entry in `list_apps`, `in_app_purchase_key` included, and its languages. |
 | `list_paywalls` | An app's paywalls, with whether each is live and its latest version. |
 | `get_paywall` | The latest version of a paywall: its variables with their current values, its products, and the test running on it. |
-| `create_paywall` | Creates an empty paywall with the ID the app will ask for and a name for the dashboard. Claude then gives it a first version with `push_paywall_version`. |
-| `push_paywall_version` | Sends a new version after Claude changes the paywall view: an HTML preview with `data-xee` markers, the products, the variables, and the app build it is for (devices on that build get it). |
+| `create_paywall` | Creates an empty paywall with the ID the app will ask for and a name for the dashboard. Claude then gives it a first version with `push_paywall`. |
+| `push_paywall` | Sends a new version after Claude changes the paywall view: an HTML preview with `data-xee` markers, the products, the variables, and the app build it is for (devices on that build get it). |
 | `list_views` | An app's views (screens or flows without products, such as onboarding), with their latest version. |
 | `get_view` | The latest version of a view: its variables with their current values, its declared events, its screens, and the test running on it. |
-| `create_view` | Creates an empty view with the ID the app will ask for. Claude then gives it a first version with `push_view_version`. |
-| `push_view_version` | Sends a new version after Claude changes a view: an HTML preview with one section per screen, the variables, the events the code sends, and the app build it is for. |
+| `create_view` | Creates an empty view with the ID the app will ask for. Claude then gives it a first version with `push_view`. |
+| `push_view` | Sends a new version after Claude changes a view: an HTML preview with one section per screen, the variables, the events the code sends, and the app build it is for. |
 | `list_products` | The app's product catalogue, for choosing which products a paywall shows. |
 | `get_product` | One product: what Xee keeps, and its status, US price and display names from App Store Connect. |
 | `create_product` | Adds a product to Xee. It does not create it in App Store Connect; make it there with the same product ID, then sync. |
 | `sync_products` | Reads products from App Store Connect into Xee, for the whole app or one product. |
 | `edit_product` | Changes a product's reference name, US price or a display name. With Sync with App Store Connect on, the change goes to Apple first; off, it stays in Xee. |
 | `get_test_results` | The tests on a paywall or a view, with the numbers for each arm, each arm's chance to be best, how many days the test has run, and when the agent looks at it next. A view test also shows its goal and, per arm, who reached it. |
-| `propose_test` | Suggests a test for you to start, on a paywall or a view (with the event that judges it), with how many users see B and when to look at the results. Claude never starts a test itself; on the Agent page, Approve and start creates and starts it in one step. |
+| `propose_test` | Suggests a test for you to start, on a paywall or a view (with the event that judges it), with how many users see B and when to look at the results. Claude never starts a test itself; on To decide, Approve and start creates and starts it in one step. |
 | `list_memories` | What the agent remembers about the app's tests: your team's notes first, then every finished or continued test and the learnings from its check-ins. |
 | `save_memory` | Saves one learning about the app, in a sentence your team can read and edit in App settings, Memory. |
-| `recommend` | At a check-in on a running test: keep it running and look again in some days, or recommend finishing with B or A. A finish waits for you on the Agent page; nothing stops until you choose Finish. |
+| `recommend` | At a check-in on a running test: keep it running and look again in some days, or recommend finishing with B or A. A finish waits for you on To decide; nothing stops until you choose Finish. |
 | `set_check_in` | Moves when the agent next looks at a running test, from 1 hour to 60 days ahead. |
 | `get_listing` | Your App Store listing per language: the version on sale, its keywords field, name and subtitle, read from App Store Connect. |
 | `get_search_terms` | What people typed before tapping your Apple Ads, with installs and spend. Needs Apple Ads connected in App settings. |
 | `get_keyword_metrics` | Popularity and difficulty for keywords: from your ASO provider if you linked one (each lookup uses its credits), otherwise from Xee's built-in data for terms the app ranks for. |
 | `get_ranked_keywords` | Every term the app ranks for in one storefront, most popular first, with popularity, difficulty and rank. From Xee's built-in keyword data. |
-| `propose_keywords` | Suggests a new keywords field for one language. You approve it on the Agent page and paste it into your next App Store version; Xee never changes App Store Connect. |
+| `propose_keywords` | Suggests a new keywords field for one language. You approve it on To decide and paste it into your next App Store version; Xee never changes App Store Connect. |
 | `get_ads_overview` | Your Apple Ads campaigns, ad groups and keywords with their bids and budgets, read live from Apple. Needs Apple Ads connected and an ad account picked in App settings. |
 | `get_ads_performance` | Apple's spend and installs beside what those installs did in your app: trials, paying subscribers, revenue, cost per subscriber and 7-day return on ad spend. Synced daily. |
 | `get_ads_targets` | The target cost per subscriber and 7-day return on ad spend you set in App settings › Apple Ads, and whether the connection can make changes. |
 | `get_ads_proposal` | One Apple Ads proposal and how each of its changes went once applied. |
-| `propose_ads_changes` | Suggests bid, budget, keyword and negative keyword changes, within Xee's limits. You tick the ones you want on the Agent page and apply them; nothing changes in Apple Ads before that. |
+| `propose_ads_changes` | Suggests bid, budget, keyword and negative keyword changes, within Xee's limits. You tick the ones you want on To decide and apply them; nothing changes in Apple Ads before that. |
 | `set_languages` | Sets the languages your paywalls and views are offered in (App settings › App Languages), usually from your app's String Catalog. Claude shows you the list and saves it after you say yes. |
 | `upload_image` | Stores an image from your app's assets (PNG, JPEG, WebP or GIF, up to 2 MB) for a paywall or view preview and returns its link, so the preview shows your real artwork. Anyone with the link can see the image. |
 | `set_translations` | Saves translations of your paywall and view texts into those languages, usually from your String Catalog, after you say yes. See [Localization](/docs/localization). |

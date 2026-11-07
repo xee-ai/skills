@@ -2,7 +2,7 @@
 
 ## Reporting a vulnerability
 
-Report a security problem privately, never as a public issue or pull request: use the **Report a vulnerability** button on this repository's [Security tab](https://github.com/xee-ai/xee-skills/security).
+Report a security problem privately, never as a public issue or pull request: use the **Report a vulnerability** button on this repository's [Security tab](https://github.com/xee-ai/skills/security).
 
 Include the skill and file, what you saw, and the steps that reproduce it. A prompt or a transcript that triggers it is the most useful thing you can send. We acknowledge every report, keep you informed while we fix it, and credit you when the fix ships unless you ask us not to.
 

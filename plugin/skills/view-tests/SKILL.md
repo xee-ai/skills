@@ -181,7 +181,7 @@ sentence that a push reaches installed builds made for the latest version at onc
 
 ## 4. Push, then tests
 
-Call `push_view_version` with `app`, `view`, `base_version`, `app_build` (chosen as `paywall-tests`
+Call `push_view` with `app`, `view`, `base_version`, `app_build` (chosen as `paywall-tests`
 A6 says, from `get_view`'s `builds`), `html`, `variables` (`key`, `type`,
 `default`, plus `renamed_from` where it applies) and `events` (`event`, `match` when narrowed,
 `label`, and `goal: true` on the suggested goal, on exactly one event; or, for a revenue goal,

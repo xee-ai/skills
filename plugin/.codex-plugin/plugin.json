@@ -5,8 +5,8 @@
   "author": {
     "name": "Xee"
   },
-  "homepage": "https://github.com/xee-ai/xee-skills",
-  "repository": "https://github.com/xee-ai/xee-skills",
+  "homepage": "https://github.com/xee-ai/skills",
+  "repository": "https://github.com/xee-ai/skills",
   "keywords": [
     "xee",
     "in-app-purchases",
@@ -27,8 +27,8 @@
       "read",
       "write"
     ],
-    "websiteURL": "https://github.com/xee-ai/xee-skills",
-    "supportURL": "https://github.com/xee-ai/xee-skills/issues",
+    "websiteURL": "https://github.com/xee-ai/skills",
+    "supportURL": "https://github.com/xee-ai/skills/issues",
     "defaultPrompt": [
       "Integrate Xee into this app with a paywall",
       "My sandbox purchase went through but premium did not unlock. Find out why",

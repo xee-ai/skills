@@ -9,21 +9,21 @@ Skills that hand your iOS app's subscription work to the agent you already have 
 **Claude Code**
 
 ```bash
-claude plugin marketplace add xee-ai/xee-skills
+claude plugin marketplace add xee-ai/skills
 claude plugin install xee-skills@xee
 ```
 
 **Codex**
 
 ```bash
-codex plugin marketplace add xee-ai/xee-skills
+codex plugin marketplace add xee-ai/skills
 codex plugin add xee-skills@xee
 ```
 
 **Any agentic CLI**, through the [skills CLI](https://skills.sh):
 
 ```bash
-npx skills add xee-ai/xee-skills --all
+npx skills add xee-ai/skills --all
 ```
 
 Other routes, including copying the skill directories by hand, are in the [plugin README](plugin/README.md#install).

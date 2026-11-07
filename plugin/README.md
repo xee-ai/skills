@@ -16,7 +16,7 @@ Subscriptions are the part of an app nobody wants to build and everybody has to:
   Adding the XeeSDK-iOS package, activating it, loading the paywall…
 ```
 
-**Supported platform:** iOS (Swift). Xee's SDK is iOS-only for now.
+**Supported platforms:** iOS (Swift). Android (Kotlin) is a preview, for `xee-integration` and the docs only.
 
 ## The toolkit
 
@@ -66,7 +66,7 @@ Run `/mcp` in Claude Code and check that `xee` is listed as connected. The full 
 ### Claude Code
 
 ```bash
-claude plugin marketplace add xee-ai/xee-skills
+claude plugin marketplace add xee-ai/skills
 claude plugin install xee-skills@xee
 ```
 
@@ -75,7 +75,7 @@ Then run `/reload-plugins` inside Claude Code.
 ### Codex
 
 ```bash
-codex plugin marketplace add xee-ai/xee-skills
+codex plugin marketplace add xee-ai/skills
 codex plugin add xee-skills@xee
 ```
 
@@ -91,13 +91,13 @@ codex plugin add xee-skills@xee
 The [skills CLI](https://skills.sh) installs into any supported agent (Cursor, Copilot, Codex, Gemini CLI, Zed, Amp and more):
 
 ```bash
-npx skills add xee-ai/xee-skills --all
+npx skills add xee-ai/skills --all
 ```
 
 `--all` is `--skill '*' --agent '*' -y`: every skill, every agent it detects, no prompts. Drop it and the CLI asks which ones you want, which is fine at a keyboard but hangs in a script. For one skill only, name it:
 
 ```bash
-npx skills add xee-ai/xee-skills --skill purchase-testing
+npx skills add xee-ai/skills --skill purchase-testing
 ```
 
 Skills installed this way do not update automatically. Run `npx skills update` to get the latest.
@@ -107,7 +107,7 @@ Skills installed this way do not update automatically. Run `npx skills update` t
 The skills are portable directories under `plugin/skills/`, and each is a Claude-style `SKILL.md`, so copying them into your agent's skills folder works:
 
 ```bash
-git clone https://github.com/xee-ai/xee-skills.git
+git clone https://github.com/xee-ai/skills.git
 cp -r xee-skills/plugin/skills/* ~/.agents/skills/
 ```
 
@@ -242,7 +242,7 @@ The skills are instructions. They run nothing on their own: everything below hap
 
 | What | When | Where it goes |
 |---|---|---|
-| **Xee MCP tools** (apps, products, paywalls, test results) | Whenever a skill reads or changes your Xee data | Xee, at the address in your `claude mcp add` command, signed in with your token. Writes (`create_product`, `sync_products`, `push_paywall_version`, `propose_test`) wait for your yes |
+| **Xee MCP tools** (apps, products, paywalls, test results) | Whenever a skill reads or changes your Xee data | Xee, at the address in your `claude mcp add` command, signed in with your token. Writes (`create_product`, `sync_products`, `push_paywall`, `propose_test`) wait for your yes |
 | **Xee docs pages** (`list_docs`, `get_doc`) | Before the agent writes SDK code or answers a question | Xee. Without the MCP, `xee-docs` reads the same pages from its own `docs/` folder on your machine |
 | **The Xee SDK package** | When `xee-integration` adds it to your project | Xcode or Swift Package Manager fetches `github.com/xee-ai/XeeSDK-iOS` |
 | **Your project files** | Reading code to find your paywall, purchase calls and Xcode scheme, and (for `xee-migration`) every call into the old SDK; editing it only after the plan you approve | Stay on your machine |
@@ -251,4 +251,4 @@ The skills are instructions. They run nothing on their own: everything below hap
 
 ## Privacy, license and support
 
-The plugin collects nothing. It is [MIT licensed](LICENSE). Report a problem or ask for a feature in the [issues](https://github.com/xee-ai/xee-skills/issues), and report a security problem privately as [SECURITY.md](../SECURITY.md) describes.
+The plugin collects nothing. It is [MIT licensed](LICENSE). Report a problem or ask for a feature in the [issues](https://github.com/xee-ai/skills/issues), and report a security problem privately as [SECURITY.md](../SECURITY.md) describes.

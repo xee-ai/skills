@@ -1,4 +1,4 @@
-Connect Apple Ads and Xee's agent reads your campaigns, judges them on what your installs earn in the app, and proposes changes. You decide: nothing changes in Apple Ads until you tick changes on the Agent page and apply them.
+Connect Apple Ads and Xee's agent reads your campaigns, judges them on what your installs earn in the app, and proposes changes. You decide: nothing changes in Apple Ads until you tick changes on To decide and apply them.
 
 Apple reports installs and spend. Xee also sees the subscriptions those installs turn into, so it can tell a keyword that brings trials from one that only brings installs.
 
@@ -59,7 +59,7 @@ The **Apple Ads** page in the sidebar has three tabs. **Campaigns** shows each c
 
 ## What the agent proposes
 
-The agent looks once a week, and you can press **Ask for Apple Ads changes** on the Agent page to get a proposal now. It acts only on a keyword, search term or campaign with at least $20 spend or 3 subscribers in the period. It can propose to:
+The agent looks once a week, and you can press **Ask for changes** on the Apple Ads page to get a proposal now. It acts only on a keyword, search term or campaign with at least $20 spend or 3 subscribers in the period. It can propose to:
 
 - raise or lower a keyword's bid, or pause a keyword that spent $20 with no subscribers;
 - add a search term that earns in a Discovery campaign as an exact keyword in the Exact campaign, and as an exact negative in the Discovery ad group;

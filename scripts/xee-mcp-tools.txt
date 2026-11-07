@@ -6,11 +6,11 @@ get_doc
 list_paywalls
 get_paywall
 create_paywall
-push_paywall_version
+push_paywall
 list_views
 get_view
 create_view
-push_view_version
+push_view
 list_products
 get_product
 create_product

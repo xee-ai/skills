@@ -1,6 +1,6 @@
 ---
 name: xee-integration
-description: Use when someone wants in-app purchases or subscriptions working in an iOS (Swift) app with Xee, from an empty project to a first sandbox purchase. Triggers on "add subscriptions to my app", "integrate Xee", "set up in-app purchases", "add a paywall", "add the Xee SDK", "install Xee", "make purchases work", "add a restore button", "unlock premium after purchase", "identify my users", "show a paywall from Xee". Adds the SDK with Swift Package Manager, activates it with the app's SDK key, identifies users, loads a paywall and its values, makes and restores purchases, reads subscription status, logs paywall views, and gets to a first sandbox purchase. It does not replace Adapty, RevenueCat or existing purchase code (use `xee-migration`), does not diagnose a purchase that already fails or a missing event (use `purchase-testing`), does not answer a pure "how does X work" docs question (use `xee-docs`), and does not build or run paywall tests (use `paywall-tests`). Xee is iOS-only for now.
+description: Use when someone wants in-app purchases or subscriptions working in an iOS (Swift) app with Xee, from an empty project to a first sandbox purchase. Triggers on "add subscriptions to my app", "integrate Xee", "set up in-app purchases", "add a paywall", "add the Xee SDK", "install Xee", "make purchases work", "add a restore button", "unlock premium after purchase", "identify my users", "show a paywall from Xee". Adds the SDK with Swift Package Manager, activates it with the app's SDK key, identifies users, loads a paywall and its values, makes and restores purchases, reads subscription status, logs paywall views, and gets to a first sandbox purchase. It does not replace Adapty, RevenueCat or existing purchase code (use `xee-migration`), does not diagnose a purchase that already fails or a missing event (use `purchase-testing`), does not answer a pure "how does X work" docs question (use `xee-docs`), and does not build or run paywall tests (use `paywall-tests`). Android is a preview: see the docs.
 ---
 
 # xee-integration
@@ -17,9 +17,12 @@ change. This skill holds the order, the warnings and who does what; it never hol
 snippets. Before writing the code for any stage, fetch that stage's docs page (see
 "Read the docs first").
 
-**Platform.** Xee supports iOS only for now (Swift, Swift Package Manager, iOS 15+, Xcode 16+).
-If the project is Android, Flutter, React Native, web or anything else, say so in the first
-reply, plainly, and stop. Do not improvise a port.
+**Platform.** This skill's stages are for iOS (Swift, Swift Package Manager, iOS 15+, Xcode 16+).
+If the project is Android (Kotlin), say in the first reply that Xee's Android SDK is a preview that
+has not yet run real Google Play purchases, then follow the `android-install`,
+`android-google-play-setup`, `android-paywalls`, `android-purchases` and `android-sandbox-testing`
+docs pages in that order, with the same yes before each edit. If it is Flutter, React Native, web or
+anything else, say so plainly and stop. Do not improvise a port.
 
 ## How you sound
 
@@ -95,7 +98,7 @@ The `xee` MCP server. Real tools only:
 | `sync_products` | Read the products from App Store Connect into Xee, for the app or one product. |
 | `list_paywalls`, `get_paywall` | See paywall IDs, whether each is live, its latest version, variables and products. |
 | `create_paywall` | Create an empty paywall (ID and name). Only in the paywall stage, only after confirmation. |
-| `push_paywall_version` | Send a paywall version (HTML preview, products, variables). Only in the paywall stage, only after confirmation. |
+| `push_paywall` | Send a paywall version (HTML preview, products, variables). Only in the paywall stage, only after confirmation. |
 
 `edit_product`, `get_test_results` and `propose_test` exist but belong to `paywall-tests` and
 to product upkeep; do not use them here.
@@ -230,7 +233,7 @@ must be live; the SDK throws for an unknown, inactive or version-less paywall.
 - To give it a version with variables, offer: "I can move your paywall's text and toggles
   into Xee so you can change and test them without a release." That is `claude-builds-paywall`.
   Fetch it, then **stop and confirm** the list of variables and products before calling
-  `push_paywall_version`. A push is refused if `base_version` is stale; re-read with
+  `push_paywall`. A push is refused if `base_version` is stale; re-read with
   `get_paywall` and redo on top. You never start a test (`paywall-tests` owns that).
 
 **3c. The code (You, after fetching `get-paywall` and `log-paywall-views`).**
@@ -322,7 +325,7 @@ sandbox account, tap restore.
 - Never remove or replace an existing purchase SDK here: that is `xee-migration`, and only
   after an explicit yes at that step.
 - Never ask for, open or paste an Apple `.p8` key. The user adds it in the dashboard.
-- Never run `create_paywall`, `push_paywall_version`, `create_product` or `sync_products`, or edit project
+- Never run `create_paywall`, `push_paywall`, `create_product` or `sync_products`, or edit project
   files broadly, without the confirm described above.
 - Never start a test. Suggesting is `paywall-tests`; starting is the user's, in the dashboard.
 - Never leave verbose logging in a release build.

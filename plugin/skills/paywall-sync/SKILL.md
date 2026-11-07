@@ -113,7 +113,7 @@ element that shows each variable. Redraw from the code what changed. You may kee
 `html` only where the view did not change. Every marker needs a variable; a variable that shows
 nothing on screen needs no marker.
 
-Call `push_paywall_version` with `app`, `paywall`, `base_version` (the latest version from
+Call `push_paywall` with `app`, `paywall`, `base_version` (the latest version from
 `get_paywall`), `app_build` (chosen as `paywall-tests` A6 says: the newest listed build for a
 values-only change, a new build when keys changed), `html`, `products` and `variables` (`key`,
 `type`, `default`, and `renamed_from` where it applies).

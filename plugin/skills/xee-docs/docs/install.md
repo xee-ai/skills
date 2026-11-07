@@ -1,5 +1,8 @@
 Add the Xee SDK to your iOS app with Swift Package Manager, then activate it once at launch with your SDK key. Every other SDK call depends on this step.
 
+> [!NOTE]
+> Building for Android? See [Install & configure Android SDK](/docs/android-install). The Android SDK is in preview.
+
 ## Requirements
 
 - iOS 15 or later (macOS 12 and visionOS 1 are also supported).

@@ -49,23 +49,7 @@ Xee.activate(context, config)
 
 ## Identify users
 
-Without an ID, the person is an anonymous profile that lives on this install. Call `identify` when they sign in, so a new device or a reinstall reaches the same profile, and so access bought on iOS unlocks Android too.
-
-```kotlin snippet="android-identify"
-Xee.identify("customer-1")
-// ... and when the person signs out:
-Xee.logout()
-```
-
-
-If the ID already belongs to a profile, the device moves to that profile. `logout` starts a new anonymous person on this device.
-
-Add what you know about the person:
-
-```kotlin snippet="android-update-profile"
-Xee.updateProfile(XeeProfileParameters(email = "a@example.com"))
-```
-
+Without an ID, the person is an anonymous profile that lives on this install. Call `Xee.identify` when they sign in, so their access follows them to a new device, and to iOS. See [Identify users](/docs/android-identify-users).
 
 ## Google's Data Safety form
 

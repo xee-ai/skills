@@ -17,4 +17,16 @@ Xee.track("onboarding_finished")
 ```
 
 
-The second `track` carries `duration_ms`. Use `Xee.optOutTracking()` when a person declines: it stops `track` and drops what is still queued. `Xee.optInTracking()` starts it again. See [Track events](/docs/track-events) for what the dashboard does with them.
+The second `track` carries `duration_ms`, the milliseconds since `time`. Timers live in memory: a cold start forgets them.
+
+## Let a person opt out
+
+```kotlin snippet="android-track-opt-out"
+if (declined) Xee.optOutTracking() else Xee.optInTracking()
+```
+
+`optOutTracking` stops `track` on this device and drops what is still queued. The choice is remembered across launches. Paywall views and purchases are not affected: tests and access need them.
+
+## What Xee does with them
+
+A test on a [view](/docs/android-views) is judged by one event, a view's page shows a funnel of them, and each person's profile in the dashboard lists them. Name events for what happened, `<flow>_<what happened>`, and keep a name once it ships: funnels and goals find events by name.

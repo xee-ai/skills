@@ -6,15 +6,6 @@
     { "slug": "identify-users", "nav": "4. Identify users", "title": "Identify users" },
     { "slug": "migrate-to-xee", "nav": "Migrate to Xee", "title": "Migrate from another SDK" }
   ] },
-  { "section": "Android (preview)", "pages": [
-    { "slug": "android-install", "nav": "Install & configure", "title": "Install & configure Android SDK" },
-    { "slug": "android-google-play-setup", "nav": "Set up Google Play", "title": "Set up Google Play" },
-    { "slug": "android-paywalls", "nav": "Paywalls and views", "title": "Paywalls and views on Android" },
-    { "slug": "android-purchases", "nav": "Purchases and access", "title": "Purchases and access on Android" },
-    { "slug": "android-track-events", "nav": "Track events", "title": "Track events on Android" },
-    { "slug": "android-sandbox-testing", "nav": "Test purchases", "title": "Test Android purchases" },
-    { "slug": "android-troubleshooting", "nav": "Troubleshooting", "title": "Android troubleshooting" }
-  ] },
   { "section": "Paywalls", "pages": [
     { "slug": "get-paywall", "nav": "Get a paywall and its values", "title": "Get a paywall and its values" },
     { "slug": "paywall-design", "nav": "Save the design and values", "title": "Save your paywall's design and values" },
@@ -40,5 +31,26 @@
   { "section": "Test & release", "pages": [
     { "slug": "sandbox-testing", "nav": "Test purchases in the sandbox", "title": "Test purchases in the sandbox" },
     { "slug": "troubleshooting", "nav": "Troubleshooting & errors", "title": "Troubleshooting & errors" }
+  ] },
+  { "section": "Get started", "pages": [
+    { "slug": "android-install", "nav": "1. Install & configure", "title": "Install & configure Android SDK" },
+    { "slug": "android-google-play-setup", "nav": "2. Set up Google Play", "title": "Set up Google Play" },
+    { "slug": "android-make-purchases", "nav": "3. Make purchases", "title": "Make purchases on Android" },
+    { "slug": "android-subscription-status", "nav": "4. Check subscription status", "title": "Check subscription status on Android" },
+    { "slug": "android-identify-users", "nav": "5. Identify users", "title": "Identify users on Android" }
+  ] },
+  { "section": "Paywalls", "pages": [
+    { "slug": "android-get-paywall", "nav": "Get a paywall and its values", "title": "Get a paywall and its values on Android" },
+    { "slug": "android-localization", "nav": "Languages", "title": "Show paywalls and views in your users' languages on Android" },
+    { "slug": "android-log-paywall-views", "nav": "Log paywall views", "title": "Log paywall views on Android" },
+    { "slug": "android-ab-tests", "nav": "A/B tests", "title": "A/B tests on Android" }
+  ] },
+  { "section": "Views & events", "pages": [
+    { "slug": "android-views", "nav": "Views", "title": "Views on Android: test screens without products" },
+    { "slug": "android-track-events", "nav": "Track events", "title": "Track events on Android" }
+  ] },
+  { "section": "Test & release", "pages": [
+    { "slug": "android-sandbox-testing", "nav": "Test purchases", "title": "Test Android purchases" },
+    { "slug": "android-troubleshooting", "nav": "Troubleshooting & errors", "title": "Android troubleshooting" }
   ] }
 ]

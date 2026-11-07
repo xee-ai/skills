@@ -33,12 +33,36 @@ for (const dir of sources) {
   }
 }
 
+// Android's pages name Android's SDK. XEE_ANDROID_SDK_DIR defaults to the sibling checkout.
+const androidDir = process.env.XEE_ANDROID_SDK_DIR ?? join(sdk, "..", "android", "xee", "src", "main", "java");
+const kotlin = (dir) =>
+  readdirSync(dir).flatMap((n) => {
+    const p = join(dir, n);
+    return statSync(p).isDirectory() ? kotlin(p) : p.endsWith(".kt") ? [p] : [];
+  });
+const androidDeclared = new Set();
+if (existsSync(androidDir)) {
+  for (const file of kotlin(androidDir)) {
+    const text = readFileSync(file, "utf8");
+    for (const m of text.matchAll(/\b(?:fun|val|var|class|object|interface|typealias)\s+`?([A-Za-z_]\w*)/g)) androidDeclared.add(m[1]);
+    for (const m of text.matchAll(/\bfun\s+interface\s+([A-Za-z_]\w*)/g)) androidDeclared.add(m[1]);
+  }
+}
+
 const allow = new Set(list("symbol-allowlist.txt"));
 const problems = [];
 const files = readdirSync(DOCS).filter((f) => f.endsWith(".md")).map((f) => join(DOCS, f));
 for (const file of files) {
   const text = readFileSync(file, "utf8");
   const note = (what) => problems.push(`${rel(file)}: ${what}`);
+  if (file.split("/").pop().startsWith("android-")) {
+    if (!androidDeclared.size) continue; // No Android checkout here: its own check-doc-snippets.py covers the samples.
+    for (const m of text.matchAll(/\bXee\.([a-zA-Z_]\w*)/g))
+      if (!androidDeclared.has(m[1])) note(`Xee.${m[1]} is not in the Android SDK`);
+    for (const m of text.matchAll(/\b(Xee[A-Z]\w*)/g))
+      if (!androidDeclared.has(m[1])) note(`${m[1]} is not in the Android SDK`);
+    continue;
+  }
   for (const m of text.matchAll(/\bXee\.([a-zA-Z_]\w*)/g))
     if (!declared.has(m[1]) && !allow.has(`Xee.${m[1]}`)) note(`Xee.${m[1]} is not in the SDK`);
   // A file name (XeePaywalls.json) or the repository (XeeSDK-iOS) is not a symbol.
